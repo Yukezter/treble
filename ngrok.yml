@@ -1,0 +1,7 @@
+version: 2
+authtoken: 2PF8jgYZTpOFZSClDRjknVduZd6_6P1NSH1imZ7U7PTX7VQR6
+console_ui: true
+tunnels:
+  treble:
+    proto: http
+    addr: host.docker.internal:8080
