@@ -5,16 +5,19 @@ services:
     container_name: dynamodb-local
     ports:
       - "8000:8000"
-    # working_dir: /home/dynamodblocal
-    # command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
-    # volumes:
-    #   - "./docker/dynamodb:/home/dynamodblocal/data"
+    working_dir: /home/dynamodblocal
+    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath ./data"
+    volumes:
+      - "./docker/dynamodb:/home/dynamodblocal/data"
   treble:
     depends_on:
       - dynamodb-local
     container_name: treble
     build:
       dockerfile: Dockerfile
+    volumes:
+      - ./docker/pki:/home/treble/docker/pki
+      - ./src:/home/treble/src
     ports:
       - "8080:8080"
     environment:
@@ -27,7 +30,7 @@ services:
     command: "start --all --config /etc/ngrok.yml"
     volumes:
       - ./ngrok.yml:/etc/ngrok.yml
-    environment:
-      NGROK_AUTHTOKEN: '2PF8jgYZTpOFZSClDRjknVduZd6_6P1NSH1imZ7U7PTX7VQR6'
     ports:
         - 4040:4040
+  # environment:
+    # NGROK_AUTHTOKEN: '2PF8jgYZTpOFZSClDRjknVduZd6_6P1NSH1imZ7U7PTX7VQR6'

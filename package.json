@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-      "start": "ts-node --transpileOnly index.ts",
-      "start:host": "ts-node --transpileOnly ./src/index.ts",
+      "start": "ts-node --transpileOnly ./src/index.ts",
       "test:db": "ts-node --transpileOnly ./src/storage/test.ts"
   },
   "keywords": [],

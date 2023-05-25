@@ -3,7 +3,7 @@ import { verifyMdmSig } from "../helpers/crypto";
 
 // This middleware verifies the CMS detached signature sent by the device
 // and attaches the certificate to the req instance
-const identityAuth: Handler = async (req, res) => {
+export const extractIdentity: Handler = async (req, res) => {
   const mdmSig = req.headers["mdm-signature"];
 
   if (typeof mdmSig !== "string") {
@@ -12,7 +12,7 @@ const identityAuth: Handler = async (req, res) => {
 
   const body = await req.body();
 
-  if (!body.length) {
+  if (!body.byteLength) {
     throw new BadRequest();
   }
 
@@ -24,5 +24,3 @@ const identityAuth: Handler = async (req, res) => {
 
   req.certificate = certificate;
 };
-
-export default identityAuth;

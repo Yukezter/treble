@@ -4,9 +4,8 @@ import { getPushCert, isPushCertStale } from "../storage/push_cert";
 // a map to store all the push providers in memory
 const providers: { [topic: string]: PushProvider } = {};
 
-// this gets (or creates) the right APNs connection by the topic
+// this gets (or creates) the right APNs connection by topic
 const getPushProvider = async (topic: string) => {
-  console.log("push provider", topic);
   if (providers[topic]) {
     if (await isPushCertStale(topic, providers[topic].staleToken)) {
       console.log("is stale");
@@ -47,12 +46,14 @@ export const push = async (pushInfos: PushInfo[]) => {
   const tokenToResponse: { [token: string]: PushResponse } = {};
   const requestsByTopic: Promise<void>[] = [];
 
+  // group requests by topic
   for (const topic in topicToPushInfos) {
     requestsByTopic.push(
       (async () => {
         const prov = await getPushProvider(topic);
         const pushInfos = topicToPushInfos[topic];
 
+        // run all the requests for this topic
         await Promise.all(
           pushInfos.map((pushInfo) => {
             return (async () => {

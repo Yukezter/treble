@@ -2,6 +2,22 @@ import http from "http";
 import crypto from "crypto";
 import { HttpError, NotFound } from "./errors";
 
+export enum ENDPOINTS {
+  INDEX = "/",
+  ENROLL = "/enroll",
+  SCEP = "/scep", // TODO
+  // MDM
+  CHECK_IN = "/mdm/checkin",
+  MDM = "/mdm/connect",
+  // API
+  API_PUSH_CERT = "/api/pushcert",
+  API_PUSH = "/api/push/:id",
+  API_ENQUEUE = "/api/enqueue",
+  API_ENROLLMENTS = "/api/enrollments", // TODO
+  API_DEVICES = "/api/devices", // TODO
+  API_USERS = "/api/users", // TODO
+}
+
 // server code I reused from another project
 
 type Methods = {

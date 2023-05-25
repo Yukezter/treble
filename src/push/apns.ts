@@ -79,9 +79,6 @@ class APNsClient {
             console.log(err);
           }
 
-          // logging listeners count to make sure they are being removed
-          console.log(client.listenerCount("timeout"));
-
           client.setTimeout(this.pingInterval, ping);
         });
       };

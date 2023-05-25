@@ -71,8 +71,6 @@ export const generateEnrollmentProfile = async (host?: string) => {
       O: "RoomNet",
       CN: "Identity Certificate",
     },
-    caKeyPath: "/server/cakey.key",
-    caCertPath: "/server/cacert.crt",
     passphrase: "treble",
   });
 
